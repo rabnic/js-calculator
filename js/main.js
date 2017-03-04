@@ -42,7 +42,7 @@ var Calculator = {
 			if(isNaN(num)) return "isNaN error";
 			if(num>14) return "Too large. Can't handle."; 
 			var result = 1;
-			for(let i = num;i>0;i--){
+			for(var i = num;i>0;i--){
 				result *= i;			
 			}
 			return result;
@@ -78,7 +78,7 @@ var Calculator = {
 			this.inputElem().value = total;
 		}
 
-	}
+	};
 
 	// Assign Event Listeners
 	document.getElementById("clear").addEventListener("click", function() {
@@ -89,16 +89,20 @@ var Calculator = {
 		Calculator.calcTotal();
 	},false);
 
+	// Trying to fix JSHint warning "Don't make functions within a loop"
+	var addHandlerTo_numAndbtns = function() {
+		Calculator.pushCharToInput(this.value);
+	};
 	var numAndbtns = document.getElementsByClassName("numOrOperator");
 	for (var i = 0; i < numAndbtns.length; i++) {
-		numAndbtns[i].addEventListener("click",function() {
-			Calculator.pushCharToInput(this.value);
-		}, false);
+		numAndbtns[i].addEventListener("click",addHandlerTo_numAndbtns, false);
 	}
 
+	// Trying to fix JSHint warning "Don't make functions within a loop"
+	var addHandlerTo_selfCalcs = function() {
+		Calculator.selfCalculate(this.value);
+	};
 	var selfCalcs = document.getElementsByClassName("selfCalculate");
 	for (var i = 0; i < selfCalcs.length; i++) {
-		selfCalcs[i].addEventListener("click",function() {
-			Calculator.selfCalculate(this.value);
-		}, false);
+		selfCalcs[i].addEventListener("click",addHandlerTo_selfCalcs, false);
 	}
