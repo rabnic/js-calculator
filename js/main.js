@@ -6,6 +6,12 @@ var Calculator = {
 			"*" : "",
 			"%" : ""
 		},
+		errors: {
+			"isNaN" : "isNaN Error",
+			"isLarge" : "Too large Can't handle",
+			"NotYet" : "Not yet implemented",
+			"infinity" : "Infinity"
+		},
 		// Get the text input element from the DOM 
 		inputElem : function() {
 			return document.getElementById("textResult");
@@ -21,8 +27,12 @@ var Calculator = {
 		// Push the button value(as single char) to the text input element value.
 		// If the last pushed char is an operator, do not allow math operators to be pushed sequentially 
 		pushCharToInput : function(char) {
+			// If the current value in the input element is an error string, clear the value
+			Object.keys(Calculator.errors).some(function(val){
+				(Calculator.errors[val] === Calculator.inputElem().value) && (Calculator.inputElem().value = "") ;
+			});
 			if(char === "+-" || char === ".") {
-				this.inputElem().value = "Not yet implemented.";
+				this.inputElem().value = this.errors.NotYet;
 				return;
 			}
 			if(this.lastCharIsOperator(char)) return;
@@ -34,23 +44,37 @@ var Calculator = {
 		// Self calculate expression, does not need the equals button to be clicked to get an answer
 		// Calculate the power of 2 of the current number in the text input element
 		calcPowerOfTwo : function(num) {
-			return Number(num *  num);
+			try {
+				var pow2 = eval(num);
+				return pow2 *  pow2;
+			} catch (e) {
+				return this.errors.isNaN;
+			}
 		},
 		// Self calculate expression, does not need the equals button to be clicked to get an answer
 		// Calculate the factorial of the current number in the text input element
 		factorial: function(num) {
-			if(isNaN(num)) return "isNaN error";
-			if(num>14) return "Too large. Can't handle."; 
-			var result = 1;
-			for(var i = num;i>0;i--){
-				result *= i;			
+			try {
+				var num = eval(num);
+				if(num>14) return this.errors.isLarge; 
+				var result = 1;
+				for(var i = num;i>0;i--){
+					result *= i;			
+				}
+				return result;
+			} catch (e) {
+				return this.errors.isNaN;
 			}
-			return result;
 		},
 		// Self calculate expression, does not need the equals button to be clicked to get an answer
 		// Calculate the square root of the current number in the text input element
 		squareRoot : function(num) {
-			return Math.sqrt(eval(num));
+			try {
+				var sqrt = eval(num);
+				return Math.sqrt(sqrt);
+			} catch (e) {
+				return this.errors.isNaN;
+			}
 		},
 		// Self calculate expression, does not need the equals button to be clicked to get an answer
 		selfCalculate: function(char) {
@@ -73,9 +97,12 @@ var Calculator = {
 			} else {
 				total = this.inputElem().value;
 			}
-			total = eval(total);
-			if(isNaN(total)) return;
-			this.inputElem().value = total;
+			try {
+				total = eval(total);
+				this.inputElem().value = total;
+			} catch (e) {
+				this.inputElem().value = this.errors.isNaN;
+			}	
 		}
 
 	};
