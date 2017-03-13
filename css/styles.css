@@ -1,0 +1,39 @@
+body {
+    background: #2F4F4F;
+}
+.container {
+    width: 350px;
+    height: auto;
+    border: 0 solid #fff;
+    border-radius: 5px;
+    margin-top: 30px;
+    box-shadow: 0 0 15px #fff;
+    background: #4682B4;
+}
+h2 {
+    color: #eee;
+    font-family: "century gothic";
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+.btn {
+    border: thin solid #4682B4;
+    font-weight: bold;
+}
+.calc-container {
+    width: 95%;
+    margin: 1px auto 8px auto;
+}
+input {
+    text-align: right;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+}
+.footer {
+    padding: 5px;
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    opacity: .9;
+}
