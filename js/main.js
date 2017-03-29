@@ -55,10 +55,10 @@ var Calculator = {
 		// Calculate the factorial of the current number in the text input element
 		factorial: function(num) {
 			try {
-				var num = eval(num);
-				if(num>14) return this.errors.isLarge; 
+				var fact = eval(num);
+				if(fact>14) return this.errors.isLarge; 
 				var result = 1;
-				for(var i = num;i>0;i--){
+				for(var i = fact;i>0;i--){
 					result *= i;			
 				}
 				return result;
