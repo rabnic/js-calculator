@@ -12,14 +12,14 @@ To get an answer for an expression you need to click the equals button.
 
 ## Operations/Operators
 - **Self Calculate:**
-    * Factorial
-    * Square root	
-    * Power of two
+  * Factorial
+  * Square root	
+  * Power of two
 - **Press Equals Button:**	
-    * Addition
-    * Substraction
-    * Multiplication
-    * Division
-    * Modulus
+  * Addition
+  * Substraction
+  * Multiplication
+  * Division
+  * Modulus
 *Not yet implemented: Decimal points and negative sign*
 
